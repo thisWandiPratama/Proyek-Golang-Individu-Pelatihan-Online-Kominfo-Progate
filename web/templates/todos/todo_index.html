@@ -1,0 +1,39 @@
+{{ define "content" }}
+<h2 class="mb-4">List of Task</h2>
+
+<a href="/todos/new" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> New Task</a>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <table class="table mb-0">
+            <thead class="thead-light">
+                <tr>
+                    <th>Task</th>
+                    <th>Asignee</th>
+                    <th>Deadline</th>
+                    <th>Done</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range .todos }}
+                <tr>
+                    <td>{{ .Task }}</td>
+                    <td>{{ .Asignee }}</td>
+                    <td>{{ .Deadline }}</td>
+                    {{ if eq .Done "1"}}
+                    <td><a href="/todos/done/{{ .ID }}"><i class="fa fa-check-square"></i></a></td>
+                    {{ else }}
+                    <td><a href="/todos/done/{{ .ID }}"><i class="fa fa-check-square-o"></i></a></td>
+                    {{ end }}
+
+                    <td><a href="/todos/edit/{{ .ID }}"><i class="fa fa-edit"></i></a></td>
+                    <td><a href="/todos/delete/{{ .ID }}"><i class="fa fa-trash"></i></a></td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{ end }}
